@@ -1,4 +1,6 @@
 /*
+ Immediate Food Delivery I
+
 Table: Delivery
 
 +-----------------------------+---------+
@@ -32,6 +34,21 @@ Delivery table:
 +-------------+-------------+------------+-----------------------------+
 */
 
+----- Solution 1 -------
+SELECT
+    ROUND((SUM(CASE WHEN order_date = customer_pref_delivery_date THEN 1 
+         ELSE 0 END) / COUNT(*)) * 100, 2) AS immediate_percentage 
+FROM delivery
+
+----- Solution 2 -------
+
+SELECT
+    ROUND((immediate_count/COUNT(*)) * 100, 2) AS immediate_percentage
+FROM delivery,
+    (SELECT
+        COUNT(delivery_id) immediate_count
+    FROM delivery
+    WHERE order_date = customer_pref_delivery_date) immediate
 
 
 /*
