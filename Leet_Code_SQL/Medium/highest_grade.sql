@@ -32,7 +32,7 @@ Enrollments table:
 +------------+-----------+-------+
 */
 
------------- Solution ------------
+------------ Solution 1 ------------
 
 SELECT 
     student_id,
@@ -45,6 +45,19 @@ FROM (
 ) ranked_grades
 WHERE ranks = 1
 ORDER BY student_id
+
+----------- Solution 2 -----------
+SELECT student_id, MIN(course_id) AS course_id, grade
+FROM Enrollments
+WHERE (student_id, grade) IN
+(
+    SELECT student_id, MAX(grade)
+    FROM Enrollments
+    GROUP BY student_id
+)
+GROUP BY student_id, grade
+ORDER BY student_id
+
 /*
 Result table:
 +------------+-------------------+
