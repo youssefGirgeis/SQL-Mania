@@ -1,4 +1,4 @@
-My Solutions to LeetCode SQL problems
+## My Solutions to LeetCode SQL problems
 
 This repo contains all my SQL solutions from Leetcode website to practice and improve my SQL skills. My goal is to learn how to write clean and fast queries.
 
