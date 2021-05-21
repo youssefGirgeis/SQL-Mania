@@ -51,7 +51,7 @@ Employee table:
 +-------------+--------+------------------+
 */
 
-------- Solution ---------
+------- Solution 1 ---------
 
 WITH t1 AS(
     SELECT
@@ -70,6 +70,19 @@ WHERE number_of_employees = (
         MAX(number_of_employees) most_of_employees
     FROM t1
 )
+
+--------------- Solution 2 ---------
+
+WITH CTE AS (
+    SELECT project_id, RANK() OVER(ORDER BY COUNT(employee_id) DESC) as ranking
+    FROM Project
+GROUP BY project_id
+    )
+    
+SELECT project_id
+FROM CTE
+WHERE ranking = 1
+ORDER BY project_id;
 
 /*
 Result table:
